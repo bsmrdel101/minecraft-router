@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
 // Routes
 app.get('/api/test', (req, res) => {
     try {
+        publicSocket.emit('TEST');
         res.json({
           status: 200,
           message: "Get data has successfully",
@@ -36,6 +37,12 @@ app.get('/api/test', (req, res) => {
       console.error(error);
       return res.status(500).send("Server error");
     }
+});
+
+let publicSocket;
+// Socket.io
+io.on('connection', (socket) => {
+    publicSocket = socket;
 });
 
 
@@ -61,6 +68,6 @@ client.on('interactionCreate', async interaction => {
 
 client.login(token);
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
