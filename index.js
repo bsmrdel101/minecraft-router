@@ -7,10 +7,18 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 app.use(express.json({ extended: false }));
 
-// Routes
-const test = require('./api/test');
-
-app.use('/api/test', test);
+app.get('/api/test', (req, res) => {
+    try {
+        console.log('Yay it worked');
+        res.json({
+          status: 200,
+          message: "Get data has successfully",
+        });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).send("Server error");
+    }
+});
 
 
 // Discord bot
