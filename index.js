@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(express.json({ extended: false }));
 
 // Views
-app.use(express.static('src'));
+app.use(express.static('public'));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
